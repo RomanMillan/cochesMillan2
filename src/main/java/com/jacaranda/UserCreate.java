@@ -43,7 +43,7 @@ public class UserCreate extends HttpServlet {
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String gender = request.getParameter("gender");
-		//String birthday  = request.getParameter("birthday");
+		String birthday  = request.getParameter("birthday");
 		boolean administrador = false;
 		boolean genderB = true;
 		if(gender.equals("Femenino")){
@@ -60,6 +60,7 @@ public class UserCreate extends HttpServlet {
 		u.setNick(user);
 		u.setPassword(password);
 		u.setSurname(surname);
+		u.setBirthday(birthday);
 		
 		UserControl.addUser(u);
 		
