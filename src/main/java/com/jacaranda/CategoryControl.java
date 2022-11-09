@@ -14,7 +14,7 @@ public class CategoryControl {
 	
 
 	public static List<Category> getCategory(){
-		Query<Category> query = ConnectionDAO.getSession().createQuery("SELECT p FROM com.jacaranda.Category p");
+		Query<Category> query = ConnectionDAO.getSession().createQuery("SELECT c FROM com.jacaranda.Category c");
 		List<Category> category = (List<Category>) query.getResultList();
 		return category;
 	}
