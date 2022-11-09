@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Create User</title>
+	</head>
+	<body>
+		<form action="../UserCreate" method="post">
+			<div align="center">
+				<table  border="1px">
+					<tr>
+						<td class="img" align="center" colspan="2">
+							<p>ComproCoches.com</p>
+						</td>
+						</tr>
+					<tr>
+						<td class="img" align="center" colspan="2">
+							<p>Crear Usuario</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Usuario <br> 
+								<input type="text" required name="user" min="1" max="100">
+							</p>
+							<p>Contraseña <br>
+								<input required type="password" min="1" name="password">
+							</p>
+							<p> Nombre <br>
+								<input required type="text" max="10" name="name">
+							</p>
+							<p> Apellido <br>
+								<input required type="text" max="10" name="surname">
+							</p>
+							<p> Sexo 
+								<select name="gender">
+									<option>Masculino</option>
+									<option>Femenino</option>
+								</select>
+							</p>
+							<p> fecha de nacimiento <br>
+								<input required type="date" name="birthday">
+							</p>
+						</td>
+					</tr>
+					<tr align="center">
+						<td colspan="2"> 
+							<input type="submit" name="Login" value="Crear Usuario"> 
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</body>
+</html>
