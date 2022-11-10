@@ -1,13 +1,14 @@
 package com.jacaranda;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="category")
@@ -18,10 +19,10 @@ public class Category {
 	private String name;
 	private String description;
 	@OneToMany(mappedBy="cat")
-	private Set<Element> element;
+	private List<Element> element;
 	
 	//constructores
-	public Category(String name, String description,Set<Element> element) {
+	public Category(String name, String description,List<Element> element) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -60,6 +61,16 @@ public class Category {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+
+	public List<Element> getElement() {
+		return element;
+	}
+
+	public void setElement(List<Element> element) {
+		this.element = element;
 	}
 
 	//Hascode and Equals

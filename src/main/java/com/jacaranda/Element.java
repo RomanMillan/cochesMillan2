@@ -16,7 +16,7 @@ public class Element {
 	private String description;
 	private int price;
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="id_category")
 	private Category cat;
 	
 	

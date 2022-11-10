@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * Servlet implementation class Userlogin
@@ -37,23 +40,36 @@ public class Userlogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		//cogemos los datos
 		String nick = request.getParameter("user");
-		String password = request.getParameter("password");
+		String password = DigestUtils.md2Hex(request.getParameter("password"));
 		
 		
 		
 		if(UserControl.isValidUser(nick,password)) {
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("login","true");
+			sesion.setAttribute("user",nick);
+			
 			out.println("<html><body>");
-			out.println("<table border='1px'><tr><td>Marcas</td><td>Descripción</td></tr>");
+			out.println("<h1>Bienvenido " + nick+"</h1>");
+			out.println("<h2>Lista de coches</h2>");
+			out.println("<table border='1px'><tr><td>Modelo</td><td>Descripción</td><td>Precio</td></tr>");
 //			List<Category> c = CategoryControl.getCategory();
 //			for(Category i: c) {
-//				out.println("<tr><td>"+ i.getName()+"</td>");
+//				out.println("<tr><td><a href=''>"+ i.getName()+"</a></td>");
 //				out.println("<td>"+ i.getDescription()+"</td></tr>");
 //			}
+			List<Element> el = ElementControl.getAllElements();
+			for(Element i: el) {
+				out.println("<tr><td>"+ i.getName()+"</td>");
+				out.println("<td>"+ i.getDescription()+"</td>");
+				out.println("<td>"+ i.getPrice()+" &reg</td></tr>");
+			}
+			
+			
 			out.println("</table>");
 			out.println("<a href='/cochesMillan2/html/Index.html'>Atras</a>");
 			out.println("</body></html>");

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**
  * Servlet implementation class UserCreate
  */
@@ -39,7 +41,7 @@ public class UserCreate extends HttpServlet {
 		
 		//cogemos los datos
 		String user = request.getParameter("user");
-		String password = request.getParameter("password");
+		String password = DigestUtils.md2Hex(request.getParameter("password"));
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String gender = request.getParameter("gender");
