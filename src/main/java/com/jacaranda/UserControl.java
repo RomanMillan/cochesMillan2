@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 public class UserControl {
 	
-	//Metodo leer Usuario
+	//Valida si el usuario es valido
 	public static boolean isValidUser(String nick, String password) {
 		boolean valid = false;
 		User user = getUser(nick, password);
@@ -17,6 +17,17 @@ public class UserControl {
 		return valid;
 	}
 	
+	//valida si el usuario es administrador
+	public static boolean isAdministrator(String nick, String password) {
+		boolean valid = false;
+		User user = getUser(nick,password);
+		if(user.isAdministrator()) {
+			valid =true;
+		}
+		return valid;
+	}
+	
+	//odtiene un usuario
 	public static User getUser(String nick, String password) {
 		User u = null;
 			Query<User> query = ConnectionDAO.getSession().createQuery("SELECT h FROM com.jacaranda.User h");

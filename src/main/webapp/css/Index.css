@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+body{
+	background-image: url("../images/backG_index.jpg");
+		background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+table{
+	border-radius: 20px;
+	padding: 10px;
+	background-color:#bfc9f7;
+	-webkit-box-shadow: 20px 21px 36px 7px rgba(0,0,0,0.75);
+	-moz-box-shadow: 20px 21px 36px 7px rgba(0,0,0,0.75);
+	box-shadow: 20px 21px 36px 7px rgba(0,0,0,0.75);
+	
+}
