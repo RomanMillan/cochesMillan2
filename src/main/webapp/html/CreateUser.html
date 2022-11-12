@@ -3,49 +3,48 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Create User</title>
+		<link rel="stylesheet" href="../css/Index.css" type="text/css">
 	</head>
 	<body>
-		<form action="../UserCreate" method="post">
+		<form class="form" action="../UserCreate" method="post">
 			<div align="center">
-				<table  border="1px">
+				<table>
 					<tr>
 						<td class="img" align="center" colspan="2">
-							<p>ComproCoches.com</p>
+							<h1 class="title">ComproCoches.com</h1>
 						</td>
 						</tr>
 					<tr>
 						<td class="img" align="center" colspan="2">
-							<p>Crear Usuario</p>
+							<h2 class="subtitle">Crear Cuenta</h2>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p>Usuario <br> 
-								<input type="text" required name="user" min="1" max="10">
-							</p>
-							<p>Contraseña <br>
-								<input required type="password" min="1" max="20" name="password">
-							</p>
-							<p> Nombre <br>
-								<input required type="text" max="10" name="name">
-							</p>
-							<p> Apellido <br>
-								<input required type="text" max="10" name="surname">
-							</p>
-							<p> Sexo 
-								<select name="gender">
-									<option>Masculino</option>
-									<option>Femenino</option>
+							<input type="text" required name="user" min="1" max="10" placeholder="Usuario">
+							<br><br>
+							<input required type="password" min="1" max="20" name="password" placeholder="Contraseña">
+							<br><br>
+							<input required type="text" max="10" name="name" placeholder="Nombre">
+							<br><br>
+							<input required type="text" max="10" name="surname" placeholder="Apellidos">
+							<br><br>
+							<!-- <label class="subtitle2">Sexo</label> -->
+								<select class="input" name="gender">
+									 <optgroup label="Sexo">
+										<option>Masculino</option>
+										<option>Femenino</option>
+									</optgroup>
 								</select>
-							</p>
-							<p> fecha de nacimiento <br>
+								<br><br>
+								<label class="subtitle2">Fecha de nacimiento</label>
 								<input required type="date" name="birthday">
-							</p>
+								<br><br>
 						</td>
 					</tr>
 					<tr align="center">
 						<td colspan="2"> 
-							<input type="submit" name="Login" value="Crear Usuario"> 
+							<input class="submit2" type="submit" name="Login" value="Crear Usuario"> 
 						</td>
 					</tr>
 				</table>

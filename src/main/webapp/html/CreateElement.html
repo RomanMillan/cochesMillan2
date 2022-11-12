@@ -3,43 +3,28 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="../css/Index.css" type="text/css">
 	</head>
 	<body>
-		<form action="../CreateElement" method="post">
+		<form class="form" action="../CreateElement" method="post">
 			<table>
-				<tr>
-					<td>
-					 <label>nombre</label>
-					 <input type="text" name="nameElement">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>description</label>
-						<textarea name="description" cols="50" rows="4" maxlength="10"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>priceElement</label>
-						<input type="number" name="priceElement">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>trademarks</label>
-						<input type="text" name="trademarks">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Insertar Imagen</label>
+			<tr>
+				<td>
+					<h2 class="subtitle">Insertar coche</h2>
+					
+					 <input type="text" name="nameElement" placeholder="Nombre">
+						<br><br>
+						<textarea class="input" name="description" placeholder="Descripción" cols="30" rows="4" maxlength="20">
+						</textarea>
+							<br><br>
+						<input type="number" name="priceElement" placeholder="Precio">
+						<br><br>
+						<input type="text" name="trademarks" placeholder="Marca de coche">
+						<br><br>
+						<h2 class="subtitle2"></h2>
 						<input type="file" name="image">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="button" value="enviar">
+						<br><br>
+						<input class="submit" type="button" value="enviar">
 					</td>
 				</tr>
 			</table>
