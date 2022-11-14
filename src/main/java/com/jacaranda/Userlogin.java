@@ -29,24 +29,12 @@ public class Userlogin extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		//cogemos los datos
 		String nick = request.getParameter("user");
 		String password = DigestUtils.md2Hex(request.getParameter("password"));
-		
 		
 		
 		if(UserControl.isValidUser(nick,password)) {
@@ -72,50 +60,13 @@ public class Userlogin extends HttpServlet {
 				out.println("<a href='/cochesMillan2/html/Index.html'>Atras</a>");
 				out.println("</body></html>");
 			}else {
-//				out.println("<html><body><h1>Agregar coche</h1>");
-//				out.println("<form action=\"CreateElement\" method=\"post\">\r\n"
-//						+ "        <table>\r\n"
-//						+ "            <tr>\r\n"
-//						+ "                <td>\r\n"
-//						+ "                    <label for=\"\">nombre</label> <br>\r\n"
-//						+ "                    <input type=\"text\" name=\"nameElement\">\r\n"
-//						+ "                </td>\r\n"
-//						+ "            </tr>\r\n"
-//						+ "            <tr>\r\n"
-//						+ "                <td>\r\n"
-//						+ "                    <label for=\"\">descripción</label><br>\r\n"
-//						+ "                    <textarea name=\"description\" cols=\"50\" rows=\"4\" max=\"10\"></textarea>\r\n"
-//						+ "                </td>\r\n"
-//						+ "            </tr>\r\n"
-//						+ "            <tr>\r\n"
-//						+ "                <td>\r\n"
-//						+ "                    <label for=\"\">Precio</label><br>\r\n"
-//						+ "                    <input type=\"number\" name=\"priceElement\">\r\n"
-//						+ "                </td>\r\n"
-//						+ "            </tr>\r\n"
-//						+ "            <tr>\r\n"
-//						+ "                <td>\r\n"
-//						+ "                    <label for=\"\">marca</label><br>\r\n"
-//						+ "                    <input type=\"text\" name=\"trademarks\">\r\n"
-//						+ "                </td>\r\n"
-//						+ "            </tr>\r\n"
-//						+ "            <tr>\r\n"
-//						+ "                <td>\r\n"
-//						+ "                    <input type=\"button\" name=\"button\" value=\"enviar\">\r\n"
-//						+ "                </td>\r\n"
-//						+ "            </tr>\r\n"
-//						+ "        </table>\r\n"
-//						+ "    </form>");
-//				out.println("</body></html>");
+
 				RequestDispatcher rd;
 				rd = request.getRequestDispatcher("/html/CreateElement.html");
 				rd.forward(request, response);
 			}
 		}else {
-//			out.println("<html><body>");
-//			out.println("<h1>No se encuentra el usuario</h1>");
-//			out.println("<a href='Index.html'>Atras</a>");
-//			out.println("</body></html>");
+
 			RequestDispatcher rd;
 			rd = request.getRequestDispatcher("/html/ErrorUser.html");
 			rd.forward(request, response);
