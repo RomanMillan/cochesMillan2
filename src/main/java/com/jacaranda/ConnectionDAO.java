@@ -13,6 +13,7 @@ public class ConnectionDAO {
 	
 		
 	public static Session getSession() {
+
 		return session;
 	}
 

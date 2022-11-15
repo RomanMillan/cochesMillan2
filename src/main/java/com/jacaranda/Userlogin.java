@@ -60,16 +60,9 @@ public class Userlogin extends HttpServlet {
 				out.println("<a href='/cochesMillan2/html/Index.html'>Atras</a>");
 				out.println("</body></html>");
 			}else {
-
-				RequestDispatcher rd;
-				rd = request.getRequestDispatcher("/html/CreateElement.html");
-				rd.forward(request, response);
-			}
+				response.sendRedirect("html/CreateElement.html");			}
 		}else {
-
-			RequestDispatcher rd;
-			rd = request.getRequestDispatcher("/html/ErrorUser.html");
-			rd.forward(request, response);
+			response.sendRedirect("html/ErrorUser.html");	
 		}
 		
 	}
