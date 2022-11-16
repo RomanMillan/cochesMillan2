@@ -69,9 +69,11 @@ response.setContentType("text/html");
 		
 		
 		PrintWriter out = response.getWriter();
-		out.println("<html><body>");
-		out.println("<h1>Modelo añadido!</h1>");
-		out.println("<a href='Userlogin'>Atras</a>");
+		out.println("<html><body><head>"
+				+ "<link rel=\"stylesheet\" href=\"css/Main.css\" type=\"text/css\">"
+				+ "</head>");
+		out.println("<h1>¡Modelo añadido!</h1>");
+		out.println("<a href='html/CreateElement.html'>Atras</a>");
 		out.println("</body></html>");
 		
 	}

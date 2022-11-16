@@ -43,10 +43,21 @@ public class Userlogin extends HttpServlet {
 				sesion.setAttribute("login","true");
 				sesion.setAttribute("user",nick);
 				
-				out.println("<html><body>");
-				out.println("<h1>Bienvenido " + nick+"</h1>");
-				out.println("<h2>Lista de coches</h2>");
-				out.println("<table border='1px'><tr><td>Modelo</td><td>Descripción</td><td>Precio</td></tr>");
+				out.println("<html>"
+						+ "<head>"
+						+ "<link rel=\"stylesheet\" href=\"css/Main.css\" type=\"text/css\">"
+						+ "</head>"
+						+ "<body>");
+				out.println("<header class='title'><h1>Bienvenido " + nick+"</h1>");
+				out.println("<h2>Lista de coches</h2>"
+						+ "<a href='/cochesMillan2/html/Index.html'>Atras</a>"
+						+ "</header>");
+				out.println("<table border='1px' align='center'>"
+						+ "<thead>"
+						+ "<tr>"
+						+ "<td>Modelo</td><td>Descripción</td><td>Precio</td>"
+						+ "</tr>"
+						+ "</thead>");
 	
 				List<Element> el = ElementControl.getAllElements();
 				for(Element i: el) {
@@ -57,7 +68,6 @@ public class Userlogin extends HttpServlet {
 				
 				
 				out.println("</table>");
-				out.println("<a href='/cochesMillan2/html/Index.html'>Atras</a>");
 				out.println("</body></html>");
 			}else {
 				response.sendRedirect("html/CreateElement.html");			}
