@@ -55,7 +55,7 @@ public class UserControl {
 			ConnectionDAO.getSession().getTransaction().commit();
 			add=true;
 		} catch (Exception e) {
-			System.out.println(e);
+			ConnectionDAO.getSession().getTransaction().rollback();
 		}
 		return add;
 	}

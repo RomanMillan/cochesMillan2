@@ -51,35 +51,45 @@ public class UserCreate extends HttpServlet {
 		if(gender.equals("Femenino")){
 			genderB = false;
 		}
-	
-		if(UserControl.isValidUser(user, password)) {
-			PrintWriter out = response.getWriter();
-			out.println("<html><body>");
-			out.println("<h1>El Usuario ya existe</h1>");
-			out.println("<a href='/cochesMillan/html/Index.html'>Atras</a>");
-			out.println("</body></html>");	
+		
+		if(!user.isEmpty() || password.length() > 20) {
+			if(UserControl.isValidUser(user, password)) {
+				PrintWriter out = response.getWriter();
+				out.println("<html><body>");
+				out.println("<h1>El Usuario ya existe</h1>");
+				out.println("<a href='html/Index.html'>Atras</a>");
+				out.println("</body></html>");	
+			}else {
+				
+				//Insertamos los datos
+				//User u = new User(user,password,name,surname,genderB,birthday,administrador);
+				User u = new User();
+				
+				u.setAdministrator(administrador);
+				u.setGender(genderB);
+				u.setName(name);
+				u.setNick(user);
+				u.setPassword(password);
+				u.setSurname(surname);
+				u.setBirthday(birthday);
+				
+				UserControl.addUser(u);
+				
+				PrintWriter out = response.getWriter();
+				out.println("<html><body>");
+				out.println("<h1>Usuario creado!</h1>");
+				out.println("<a href='html/Index.html'>Atras</a>");
+				out.println("</body></html>");	
+			}
+			
 		}else {
-			
-			//Insertamos los datos
-			//User u = new User(user,password,name,surname,genderB,birthday,administrador);
-			User u = new User();
-			
-			u.setAdministrator(administrador);
-			u.setGender(genderB);
-			u.setName(name);
-			u.setNick(user);
-			u.setPassword(password);
-			u.setSurname(surname);
-			u.setBirthday(birthday);
-			
-			UserControl.addUser(u);
-			
 			PrintWriter out = response.getWriter();
 			out.println("<html><body>");
-			out.println("<h1>Usuario creado!</h1>");
-			out.println("<a href='/cochesMillan/html/Index.html'>Atras</a>");
-			out.println("</body></html>");	
+			out.println("<h1>Datos No validos</h1>");
+			out.println("<a href='html/CreateUser.html'>Atras</a>");
+			out.println("</body></html>");
 		}
+	
 		
 		
 	}
