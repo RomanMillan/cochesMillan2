@@ -2,7 +2,9 @@ package com.jacaranda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,8 +32,11 @@ public class Userlogin extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Set<Category> myCart = new HashSet<Category>();
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		
 		//cogemos los datos
 		String nick = request.getParameter("user");
 		String password = DigestUtils.md2Hex(request.getParameter("password"));
@@ -45,7 +50,7 @@ public class Userlogin extends HttpServlet {
 				
 				out.println("<html>"
 						+ "<head>"
-						+ "<link rel=\"stylesheet\" href=\"css/Main.css\" type=\"text/css\">"
+						+ "<link rel='stylesheet' href='css/Main.css' type='text/css'>"
 						+ "</head>"
 						+ "<body>");
 				out.println("<header class='title'><h1>Bienvenido " + nick+"</h1>");
@@ -55,7 +60,7 @@ public class Userlogin extends HttpServlet {
 				out.println("<table border='1px' align='center'>"
 						+ "<thead>"
 						+ "<tr>"
-						+ "<td>Modelo</td><td>Descripción</td><td>Precio</td>"
+						+ "<td>Modelo</td><td>Descripción</td><td>Precio</td><td>Cantidad</td> <td>Añadir</td>"
 						+ "</tr>"
 						+ "</thead>");
 	
@@ -63,14 +68,17 @@ public class Userlogin extends HttpServlet {
 				for(Element i: el) {
 					out.println("<tr><td>"+ i.getName()+"</td>");
 					out.println("<td>"+ i.getDescription()+"</td>");
-					out.println("<td>"+ i.getPrice()+" e</td></tr>");
+					out.println("<td>"+ i.getPrice()+" e</td>");
+					out.println("<td><input type='number'></td>");
+					out.println("<td><a href='#'>Añadir</a></td></tr>");
 				}
 				
 				
 				out.println("</table>");
 				out.println("</body></html>");
 			}else {
-				response.sendRedirect("html/CreateElement.html");			}
+				response.sendRedirect("html/CreateElement.html");			
+			}
 		}else {
 			response.sendRedirect("html/ErrorUser.html");	
 		}
