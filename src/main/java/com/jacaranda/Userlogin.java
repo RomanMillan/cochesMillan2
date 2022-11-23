@@ -31,15 +31,65 @@ public class Userlogin extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Set<Category> myCart = new HashSet<Category>();
-		
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Comprobar que no estoy recibiendo ningun paraématro
+		// -sui no tengo pararmeto llamo a dopost y si tengo error
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		//cogemos los datos
-		String nick = request.getParameter("user");
-		String password = DigestUtils.md2Hex(request.getParameter("password"));
+		String nick = null;
+		String password = null;
+			HttpSession sesion = request.getSession();
+			nick = (String) sesion.getAttribute("user");
+			
+			out.println("<html>"
+					+ "<head>"
+					+ "<link rel='stylesheet' href='css/Main.css' type='text/css'>"
+					+ "</head>"
+					+ "<body>");
+			out.println("<header class='title'><h1>Bienvenido " + nick+"</h1>");
+			out.println("<h2>Lista de coches</h2>"
+					+ "<a href='/cochesMillan2/html/Index.html'>Atras</a>"
+					+ "</header>");
+			out.println("<table border='1px' align='center'>"
+					+ "<thead>"
+					+ "<tr>"
+					+ "<td>Modelo</td><td>Descripción</td><td>Precio</td><td>Cantidad</td> <td>Añadir</td>"
+					+ "</tr>"
+					+ "</thead>");
+
+			List<Element> el = ElementControl.getAllElements();
+			for(Element i: el) {
+				out.println("<tr><td>"+ i.getName()+"</td>");
+				out.println("<td>"+ i.getDescription()+"</td>");
+				out.println("<td>"+ i.getPrice()+" e</td>");
+				out.println("<form action='CartQuery' method='post'>");
+				out.println("<td hidden='true'><input name='idE' value='"+i.getId()+"'></td>");
+				out.println("<td><input name='quE'></td>");
+				out.println("<td><button type='submit'>Añadir</button></td></form></tr>");
+			}
+			
+			
+			out.println("</table>");
+			out.println("</body></html>");
+			
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		String nick = null;
+		String password = null;
+		
+		if(nick != null || password != null) {
+			
+		}else {
+			
+		}
+		nick = request.getParameter("user");
+		password = DigestUtils.md2Hex(request.getParameter("password"));
 		
 		
 		if(UserControl.isValidUser(nick,password)) {
@@ -69,8 +119,10 @@ public class Userlogin extends HttpServlet {
 					out.println("<tr><td>"+ i.getName()+"</td>");
 					out.println("<td>"+ i.getDescription()+"</td>");
 					out.println("<td>"+ i.getPrice()+" e</td>");
-					out.println("<td><input type='number'></td>");
-					out.println("<td><a href='#'>Añadir</a></td></tr>");
+					out.println("<form action='CartQuery' method='post'>");
+					out.println("<td hidden='true'><input name='idE' value='"+i.getId()+"'></td>");
+					out.println("<td><input name='quE'></td>");
+					out.println("<td><button type='submit'>Añadir</button></td></form></tr>");
 				}
 				
 				
