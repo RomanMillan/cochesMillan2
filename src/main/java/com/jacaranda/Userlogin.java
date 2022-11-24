@@ -42,34 +42,67 @@ public class Userlogin extends HttpServlet {
 			
 	}
 
-	String nick;
-	String password;
 	//METODO DOPOST
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		/*
+		 * Me puede llegar aqui, que venga porque ha introducido usuario y login
+		 *       -> Si el usuario y el password es correcto
+		 *       		->session.setAttrbitue("user",usuario);
+		 *       		-> Que sea administrador
+		 *       				-> Pongo una señal en la session diciendo administrador
+		 *                            (session.setAttributle("administrado", True)
+		 *       		-> Que sea normal
+		 *          			-> Pongo una señal en la session diciendo NO administrador
+		 *                            (session.setAttributle("administrado", false)
+		 *       		-> Yo puedo mostrar la página, sólo que en la cabecera, miro si 
+		 *       			es administrador pongo un botón, y si no lo es, no lo pongo.
+		 *       -> Si el usuario y password no son correcto -> Error
+		 * Me puede llegar aqui, porque ya esté logeado, con lo cual tiene session
+		 * 		-> Recupero la sessión
+		 * 			-> No está definido user -> Error
+		 * 			-> Tengo el valor de user -> 
+		 * 		        -> Yo puedo mostrar la página, sólo que en la cabecera, miro si 
+		 *       			es administrador pongo un botón, y si no lo es, no lo pongo.
+		 * Me puede llegar aquí, por otro movito  -> Error
+		 * 
+		 * 
+		 */
+			
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession sesion = request.getSession();
 
-//		if(sesion.getAttribute("login")==null && !request.getParameter("user").equals(nick)) {
-		if(sesion.getAttribute(nick) == null) {
-			nick = request.getParameter("user");
-			password = DigestUtils.md2Hex(request.getParameter("password"));
-		}
+		if(sesion.getAttribute("login")== null) {
+			String nick = request.getParameter("user");
+			String password = DigestUtils.md2Hex(request.getParameter("password"));
+			sesion.setAttribute("login","true");
+			sesion.setAttribute("user",nick);
+			sesion.setAttribute("administrator", "false");
 			if(UserControl.isValidUser(nick,password)) {
-				if(!UserControl.isAdministrator(nick,password)) {
-					sesion.setAttribute("login","true");
-					sesion.setAttribute("user",nick);
+				if(UserControl.isAdministrator(nick,password)) {
+					sesion.setAttribute("administrator", "true");
+				}
+			}else {
+				response.sendRedirect("html/ErrorUser.html");
+			}
+		}else {
+			response.sendRedirect("html/ErrorUser.html");
+		}
+		
+			
+		
 					
 					out.println("<html>"
 							+ "<head>"
 							+ "<link rel='stylesheet' href='css/Main.css' type='text/css'>"
 							+ "</head>"
 							+ "<body>");
-					out.println("<header class='title'><h1>Bienvenido " + nick+"</h1>");
+					out.println("<header class='title'><h1>Bienvenido " + +"</h1>");
 					out.println("<h2>Lista de coches</h2>"
-							+ "<a href='/cochesMillan2/html/Index.html'>Atras</a> <input type='submit' value='cerrar sesión'>"
+							+ "<a href='/cochesMillan2/html/Index.html'>Atras</a> "
+							+ "<a href='/cochesMillan2/html/Index.html'>Cerrar Sesion</a>"
 							+ "</header>");
 					out.println("<table border='1px' align='center'>"
 							+ "<thead>"
@@ -77,7 +110,7 @@ public class Userlogin extends HttpServlet {
 							+ "<td>Modelo</td><td>Descripción</td><td>Precio</td><td>Cantidad</td> <td>Añadir</td>"
 							+ "</tr>"
 							+ "</thead>");
-		
+					
 					List<Element> el = ElementControl.getAllElements();
 					for(Element i: el) {
 						out.println("<tr><td>"+ i.getName()+"</td>");
@@ -94,10 +127,9 @@ public class Userlogin extends HttpServlet {
 				}else {
 					response.sendRedirect("html/CreateElement.html");			
 				}
-			}else {
-				response.sendRedirect("html/ErrorUser.html");	
-			}
-
+			
+			
 	}
+	
 
 }
