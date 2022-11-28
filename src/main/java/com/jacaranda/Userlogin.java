@@ -44,7 +44,7 @@ public class Userlogin extends HttpServlet {
 
 	//METODO DOPOST
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   
 		
 		/*
 		 * Me puede llegar aqui, que venga porque ha introducido usuario y login
@@ -80,9 +80,13 @@ public class Userlogin extends HttpServlet {
 			sesion.setAttribute("login","true");
 			sesion.setAttribute("user",nick);
 			sesion.setAttribute("administrator", "false");
+			
 			if(UserControl.isValidUser(nick,password)) {
 				if(UserControl.isAdministrator(nick,password)) {
 					sesion.setAttribute("administrator", "true");
+					response.sendRedirect("jsp/cars.jsp");
+				}else {
+					response.sendRedirect("jsp/cars.jsp");
 				}
 			}else {
 				response.sendRedirect("html/ErrorUser.html");
@@ -90,45 +94,7 @@ public class Userlogin extends HttpServlet {
 		}else {
 			response.sendRedirect("html/ErrorUser.html");
 		}
-		
-			
-		
-					
-					out.println("<html>"
-							+ "<head>"
-							+ "<link rel='stylesheet' href='css/Main.css' type='text/css'>"
-							+ "</head>"
-							+ "<body>");
-					out.println("<header class='title'><h1>Bienvenido " + +"</h1>");
-					out.println("<h2>Lista de coches</h2>"
-							+ "<a href='/cochesMillan2/html/Index.html'>Atras</a> "
-							+ "<a href='/cochesMillan2/html/Index.html'>Cerrar Sesion</a>"
-							+ "</header>");
-					out.println("<table border='1px' align='center'>"
-							+ "<thead>"
-							+ "<tr>"
-							+ "<td>Modelo</td><td>Descripción</td><td>Precio</td><td>Cantidad</td> <td>Añadir</td>"
-							+ "</tr>"
-							+ "</thead>");
-					
-					List<Element> el = ElementControl.getAllElements();
-					for(Element i: el) {
-						out.println("<tr><td>"+ i.getName()+"</td>");
-						out.println("<td>"+ i.getDescription()+"</td>");
-						out.println("<td>"+ i.getPrice()+" e</td>");
-						out.println("<form action='CartQuery' method='post'>");
-						out.println("<td hidden='true'><input name='idE' value='"+i.getId()+"'></td>");
-						out.println("<td><input type='number' name='quE'></td>");
-						out.println("<td><button type='submit'>Añadir</button></td></form></tr>");
-					}
-					
-					out.println("</table>");
-					out.println("</body></html>");
-				}else {
-					response.sendRedirect("html/CreateElement.html");			
-				}
-			
-			
+				
 	}
 	
 
