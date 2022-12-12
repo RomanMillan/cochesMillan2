@@ -77,11 +77,12 @@ public class Userlogin extends HttpServlet {
 		if(sesion.getAttribute("login")== null) {
 			String nick = request.getParameter("user");
 			String password = DigestUtils.md2Hex(request.getParameter("password"));
-			sesion.setAttribute("login","true");
-			sesion.setAttribute("user",nick);
+
 			sesion.setAttribute("administrator", "false");
 			
 			if(UserControl.isValidUser(nick,password)) {
+				sesion.setAttribute("login","true");
+				sesion.setAttribute("user",nick);
 				if(UserControl.isAdministrator(nick,password)) {
 					sesion.setAttribute("administrator", "true");
 					response.sendRedirect("jsp/cars.jsp");

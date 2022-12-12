@@ -1,3 +1,4 @@
+<%@page import="java.awt.Button"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@page import="com.jacaranda.ElementControl"%>
@@ -8,12 +9,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<link rel='stylesheet' href='css/Main.css' type='text/css'>
+		<link rel='stylesheet' href='../css/Main.css' type='text/css'>
 	</head>
 	<body>
+		<h1>Bienvenido <%=session.getAttribute("user")%></h1>
 		<h2>Lista de coches</h2>
-		<a href='/cochesMillan2/html/Index.html'>Atras</a> 
-		<a href='/cochesMillan2/html/Index.html'>Cerrar Sesion</a>	
+		<a href='/cochesMillan2/html/Index.jsp'>Atras</a> 
+		<a href='/cochesMillan2/html/Index.jsp'>Cerrar Sesion</a>	
+		<%
+		if(session.getAttribute("administrator").equals("true")){
+		%>
+			<button><a href="CreateElement.html">Insertar Modelo</a></button>
+		<%
+		};
+		%>
 		<table align='center'>
 			<thead>
 				<tr>
