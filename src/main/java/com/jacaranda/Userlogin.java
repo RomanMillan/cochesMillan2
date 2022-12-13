@@ -1,12 +1,7 @@
 package com.jacaranda;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,18 +69,19 @@ public class Userlogin extends HttpServlet {
 		 */
 			
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		HttpSession sesion = request.getSession();
 
 		if(sesion.getAttribute("login")== null) {
 			String nick = request.getParameter("user");
 			String password = DigestUtils.md2Hex(request.getParameter("password"));
-
-			sesion.setAttribute("administrator", "false");
+//			sesion.setAttribute("cart", "false");
 			
 			if(UserControl.isValidUser(nick,password)) {
 				sesion.setAttribute("login","true");
 				sesion.setAttribute("user",nick);
+				Cart cart = new Cart(); 
+				sesion.setAttribute("cart",cart);
+				sesion.setAttribute("administrator", "false");
 				if(UserControl.isAdministrator(nick,password)) {
 					sesion.setAttribute("administrator", "true");
 					response.sendRedirect("jsp/cars.jsp");

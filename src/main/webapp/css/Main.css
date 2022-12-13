@@ -26,12 +26,14 @@ header{
 
 h1{
 	font-size: 40px;
-	
+	color: #fff;
+}
+h2{
+	color: #fff;
 }
 
 input{
 	size: 5px;
-	color: red;
 	background-color: blue;
 }
 

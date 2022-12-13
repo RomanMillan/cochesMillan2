@@ -14,8 +14,9 @@
 	<body>
 		<h1>Bienvenido <%=session.getAttribute("user")%></h1>
 		<h2>Lista de coches</h2>
-		<a href='/cochesMillan2/html/Index.jsp'>Atras</a> 
+		<!-- <a href='/cochesMillan2/html/Index.jsp'>Atras</a>  -->
 		<a href='/cochesMillan2/html/Index.jsp'>Cerrar Sesion</a>	
+		<a href='/cochesMillan2/jsp/Cart.jsp'>Carrito</a>	
 		<%
 		if(session.getAttribute("administrator").equals("true")){
 		%>
@@ -46,10 +47,10 @@
 							<input name='idE' value='<%=i.getId()%>'>
 						</td>
 						<td>
-							<input type='number' name='quE'>
+							<input type='number' name='quE' min='1'>
 						</td>
 						<td>
-							<button type='submit'>Añadir</button>
+							<button type='submit'>Añadir a carrito</button>
 						</td>
 					</form>
 				</tr>

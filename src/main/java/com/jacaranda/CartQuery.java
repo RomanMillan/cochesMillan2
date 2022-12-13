@@ -1,15 +1,13 @@
 package com.jacaranda;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CartQuery
@@ -42,12 +40,11 @@ public class CartQuery extends HttpServlet {
 		int quElement = Integer.parseInt(request.getParameter("quE"));
 		
 		Element e = ElementControl.getElement(idElement);
-		Cart cart = new Cart();
-		cart.setMyCart(e);
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<html>"+idElement+" "+ quElement+"</html>");
+		HttpSession sesion = request.getSession();
+		Cart aux = (Cart) sesion.getAttribute("cart");
+		aux.setMyCart(e);
+
 		
 		response.sendRedirect("Userlogin");
 		
