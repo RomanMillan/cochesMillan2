@@ -38,7 +38,10 @@ public class Userlogin extends HttpServlet {
 	
 		doPost(req,resp);
 			
-			
+//		resp.setContentType("text/html");
+//		PrintWriter out = resp.getWriter();
+//		out.print("hola");
+		
 			
 	}
 
@@ -93,7 +96,7 @@ public class Userlogin extends HttpServlet {
 				response.sendRedirect("html/ErrorUser.html");
 			}
 		}else {
-			response.sendRedirect("html/ErrorUser.html");
+			response.sendRedirect("jsp/cars.jsp");
 		}
 				
 	}

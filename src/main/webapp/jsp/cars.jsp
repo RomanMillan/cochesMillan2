@@ -41,7 +41,7 @@
 					<td><%=i.getName()%></td>
 					<td><%=i.getDescription()%></td>
 					<td><%=i.getPrice()%></td>
-					<form action='CartQuery' method='post'>
+					<form action='../CartQuery' method='post'>
 						<td hidden='true'>
 							<input name='idE' value='<%=i.getId()%>'>
 						</td>
